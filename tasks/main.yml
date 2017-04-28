@@ -10,5 +10,9 @@
 - name: setup conteinerizers
   copy: dest=/etc/mesos-slave/containerizers content="docker"
 
+- name: set roles
+  copy: dest=/etc/mesos-slave/default_role content="{{ default_role }}"
+  when: default_role is defined
+
 - name: start mesos agent
   service: name=mesos-slave state=restarted enabled=yes
